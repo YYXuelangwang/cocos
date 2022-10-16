@@ -1,0 +1,23 @@
+{
+  "name": "ccc-load-points",
+  "version": "0.0.1",
+  "description": "The package template for getting started.",
+  "author": "Cocos Creator",
+  "main": "main.js",
+  "main-menu": {
+    "i18n:MAIN_MENU.package.title/ccc-load-points/open": {
+      "message": "ccc-load-points:open"
+    },
+    "i18n:MAIN_MENU.package.title/ccc-load-points/hello": {
+      "message": "ccc-load-points:say-hello"
+    }
+  },
+  "scene-script": "scene-walker.js",
+  "panel": {
+    "main": "panel/index.js",
+    "type": "dockable",
+    "title": "ccc-load-points",
+    "width": 400,
+    "height": 300
+  }
+}
