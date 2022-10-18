@@ -1,0 +1,17 @@
+:host {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.main {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.tip {
+    height: 60px;
+}
+
+.number-input {
+    width: 50px;
+}

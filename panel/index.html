@@ -1,0 +1,77 @@
+<div class="main">
+    <!-- 标题 -->
+    <h2>{{titleLabel}}</h2>
+    <ui-box-container class="layout vertical left">
+        <div>
+            <ui-hint style="line-height: 19px;">
+                输出当前场景中节点的一级children的坐标值
+                <br>
+                - 原始坐标： 输出当前场景里编辑后的节点坐标值
+                <br>
+                - 偏移坐标： 输出偏移后的节点坐标值
+            </ui-hint>
+            <hr />
+            <ui-button class="button blue big" @click="onDumpOriginPts" v-disabled="isProcessing">输出原始坐标值
+            </ui-button>
+
+            <ui-prop name="offset" tooltip="所有children的坐标偏移量">
+                <ui-input class="number-input" type="number" size="small" v-value="offsetNum"></ui-input> 
+            </ui-prop>
+
+            <div id="offsetlan" class="layout vertical left">
+                <ui-prop name="Indexs" tooltip="child的名字, 多个用','隔开，比如'1,2,node,3">
+                    <ui-input class="number-input" type="string" size="small" v-value="offsetNum" ></ui-input> 
+                </ui-prop>
+                <ui-prop name="x">
+                    <ui-input class="number-input" type="number" size="small" v-vlue="offsetx"></ui-input>
+                </ui-prop>
+                <ui-prop name="y">
+                    <ui-input class="number-input" type="number" size="small" v-vlue="offsety"></ui-input>
+                </ui-prop>
+            </div>
+            <hr />
+
+            <ui-button class="button blue big" @click="onApplyBtnClick" v-disabled="isProcessing">输出偏移后的坐标值
+            </ui-button>
+            <!-- <ui-prop name="启用" type="boolean" v-value="enabled" tooltip="· 项目构建完成后自动压缩 PNG 资源"></ui-prop> -->
+            <!-- <ui-prop name="配置保存目录" tooltip="· 相对于项目根目录的路径">
+                <ui-select class="flex-1" v-value="configSaveDir">
+                    <option value="local">local（默认不参与 Git 同步）</option>
+                    <option value="settings">settings（默认参与 Git 同步）</option>
+                </ui-select>
+            </ui-prop> -->
+            <hr />
+            <ui-prop name="最低质量（%）" type="number" v-value="minQuality" tooltip="· 最低图像质量"></ui-prop>
+            <ui-prop name="最高质量（%）" type="number" v-value="maxQuality" tooltip="· 最高图像质量"></ui-prop>
+            <!-- <ui-prop name="色彩" type="number" v-value="colors" tooltip="· 图像色彩"></ui-prop> -->
+            <ui-prop slide name="速度" type="number" v-value="speed" min="1" max="10" step="1" precision="0"
+                tooltip="· 压缩速度与质量的权重，默认值为 3。&#10;· 10 档可能会降低 5％ 的质量，但压缩速度比 3 档快 8 倍。">
+            </ui-prop>
+            <hr />
+            <ui-prop name="需要排除的文件夹" tooltip="· 相对于 assets/ 目录的路径&#10;· 多个值之间必须用 ',' 隔开" auto-height>
+                <ui-text-area class="flex-1" type="string" size="big" v-value="excludeFolders"
+                    placeholder="textures/aaa/,&#10;textures/bbb/">
+                </ui-text-area>
+            </ui-prop>
+            <ui-prop name="需要排除的文件" tooltip="· 相对于 assets/ 目录的路径&#10;· 多个值之间必须用 ',' 隔开" auto-height>
+                <ui-text-area class="flex-1" type="string" size="big" v-value="excludeFiles"
+                    placeholder="textures/abc.png,&#10;textures/123.png">
+                </ui-text-area>
+            </ui-prop>
+            <hr />
+            <ui-hint style="line-height: 19px;" id="result">
+                --
+            </ui-hint>
+            <hr />
+            <!-- Git 仓库 -->
+            <ui-hint class="tip" style="margin-top: 5px;">
+                <ui-markdown style="height: 48px;" v-value="repositoryLabel"></ui-markdown>
+            </ui-hint>
+            <hr />
+        </div>
+        <!-- 应用按钮 -->
+        <ui-button class="button blue big" @click="onApplyBtnClick" v-disabled="isProcessing">{{applyLabel}}
+        </ui-button>
+    </ui-box-container>
+    <br>
+</div>
