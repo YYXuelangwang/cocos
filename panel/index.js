@@ -26,9 +26,21 @@ Editor.Panel.extend({
 
   // element and variable binding
   $: {
-    btn: '#btn',
-    label: '#label',
-    dump: '#dump',
+    // btn: '#btn',
+    // label: '#label',
+    // dump: '#dump',
+    dumpOrigBtn: '#btn1',
+    dumpOffsetBtn: '#btn2',
+
+    table: '#table',
+    row1: '#row1',
+    index1: '#index1',
+    x1: '#x1',
+    y1: '#y1',
+
+    index2: '#index2',
+    x2: '#x2',
+    y2: '#y2',
   },
 
   // method executed when template and styles are successfully loaded and initialized
@@ -59,6 +71,58 @@ Editor.Panel.extend({
       // });
 
     // });
+
+    this.$dumpOffsetBtn.addEventListener('confirm', () => {
+      let no = this.$table;
+      
+      Editor.Scene.callSceneScript('ccc-load-points', 'getfirstchildren-points', '', function (err, points) {
+        if (err) {
+          Editor.log(err);
+        }
+
+        let no1 = this.$table.getElementById("index1");
+
+        // console.log(`get-canvas-children callback : length - ${length}`);
+        if (this.$index1.value && this.$index1.value.length > 0) {
+          let chs = this.$.index1.value;
+          chs = chs.replace(" ", "");
+          let ls = chs.split(",");
+          let x = this.$x1.value ? Number(this.$x1.value) : 0;
+          let y = this.$y1.value ? Number(this.$y1.value) : 0;
+          for (let i = 0; i < ls.length; i++) {
+            let  name = ls[i];
+            points[name].x = points[name].x + x;
+            points[name].y = points[name].y + y;
+          }
+        }
+
+        if (this.$index2.value && this.$index2.value.length > 0) {
+          let chs = this.$.index2.value;
+          chs = chs.replace(" ", "");
+          let ls = chs.split(",");
+          let x = this.$x2.value ? Number(this.$x2.value) : 0;
+          let y = this.$y2.value ? Number(this.$y2.value) : 0;
+          for (let i = 0; i < ls.length; i++) {
+            let  name = ls[i];
+            points[name].x = points[name].x + x;
+            points[name].y = points[name].y + y;
+          }
+        }
+
+        Editor.log(JSON.stringify(points));
+      });
+    });
+
+    this.$dumpOrigBtn.addEventListener('confirm', () => {
+      Editor.Scene.callSceneScript('ccc-load-points', 'getfirstchildren-points', '', function (err, points) {
+        if (err) {
+          Editor.log(err);
+        }
+        // console.log(`get-canvas-children callback : length - ${length}`);
+
+        Editor.log(JSON.stringify(points));
+      });
+    });
 
     // this.$dump.addEventListener('confirm', () => {
     //   Editor.Scene.callSceneScript('ccc-load-points', 'getfirstchildren-points', '', function (err, points) {
