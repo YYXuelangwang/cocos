@@ -32,8 +32,6 @@ Editor.Panel.extend({
     dumpOrigBtn: '#btn1',
     dumpOffsetBtn: '#btn2',
 
-    table: '#table',
-    row1: '#row1',
     index1: '#index1',
     x1: '#x1',
     y1: '#y1',
@@ -41,6 +39,7 @@ Editor.Panel.extend({
     index2: '#index2',
     x2: '#x2',
     y2: '#y2',
+
   },
 
   // method executed when template and styles are successfully loaded and initialized
@@ -73,39 +72,40 @@ Editor.Panel.extend({
     // });
 
     this.$dumpOffsetBtn.addEventListener('confirm', () => {
-      let no = this.$table;
-      
+      let self = this;
+      let getRowData = function(i) {
+        let index = i == 1 ? self.$index1 : self.$index2;
+        let xt = i == 1? self.$x1 : self.$x2;
+        let yt = i == 1? self.$y1 : self.$y2;
+        if (index.value && index.value.length > 0) {
+          let chs = index.value;
+          chs = chs.replace(" ", "");
+          let ls = chs.split(",");
+          let x = xt.value ? Number(xt.value) : 0;
+          let y = yt.value ? Number(yt.value) : 0;
+          return {"chs":chs, "x":x, "y":y}
+        }
+        return {"chs":"", "x":0, "y":0}
+      }
+
+      let write_data = [getRowData(1), getRowData(2)];
+
       Editor.Scene.callSceneScript('ccc-load-points', 'getfirstchildren-points', '', function (err, points) {
         if (err) {
           Editor.log(err);
         }
 
-        let no1 = this.$table.getElementById("index1");
-
-        // console.log(`get-canvas-children callback : length - ${length}`);
-        if (this.$index1.value && this.$index1.value.length > 0) {
-          let chs = this.$.index1.value;
-          chs = chs.replace(" ", "");
-          let ls = chs.split(",");
-          let x = this.$x1.value ? Number(this.$x1.value) : 0;
-          let y = this.$y1.value ? Number(this.$y1.value) : 0;
-          for (let i = 0; i < ls.length; i++) {
-            let  name = ls[i];
-            points[name].x = points[name].x + x;
-            points[name].y = points[name].y + y;
-          }
-        }
-
-        if (this.$index2.value && this.$index2.value.length > 0) {
-          let chs = this.$.index2.value;
-          chs = chs.replace(" ", "");
-          let ls = chs.split(",");
-          let x = this.$x2.value ? Number(this.$x2.value) : 0;
-          let y = this.$y2.value ? Number(this.$y2.value) : 0;
-          for (let i = 0; i < ls.length; i++) {
-            let  name = ls[i];
-            points[name].x = points[name].x + x;
-            points[name].y = points[name].y + y;
+        for (let i = 0; i < write_data.length; i++) {
+          let cf = write_data[i];
+          if (cf.chs.length > 0) {
+            let ls = cf.chs.split(",");
+            let x = cf.x;
+            let y = cf.y;
+            for (let i = 0; i < ls.length; i++) {
+              let  name = ls[i];
+              points[name].x = points[name].x + x;
+              points[name].y = points[name].y + y;
+            }
           }
         }
 

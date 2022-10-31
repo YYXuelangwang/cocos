@@ -1,6 +1,6 @@
 <div class="main">
     <!-- 标题 -->
-    <h2>{{titleLabel}}</h2>
+    <h2>print points</h2>
     <ui-box-container class="layout vertical left">
         <div>
             <ui-hint style="line-height: 19px;">
@@ -17,7 +17,9 @@
             <!-- <ui-prop name="offset" tooltip="所有children的坐标偏移量">
                 <ui-input class="number-input" type="number" size="small" v-value="offsetNum"></ui-input> 
             </ui-prop> -->
-
+            <!-- <ui-prop name="x" id="testName">
+                <ui-input class="number-input" type="number" size="small" v-vlue="offsetx"></ui-input>
+            </ui-prop> -->
             <!-- <div id="offsetlan" class="layout vertical left">
                 <ui-prop name="Indexs" tooltip="child的名字, 多个用','隔开，比如'1,2,node,3">
                     <ui-input class="number-input" type="string" size="small" v-value="offsetNum" ></ui-input> 
@@ -31,10 +33,25 @@
             </div>
             <hr /> -->
 
+            <ui-prop name="offsetlan1" tooltip="child的名字，多个用“，”隔开；第二个是x坐标偏移量；第三个是y坐标偏移量；"></ui-prop>
+            <ui-box-container class="layout horizontal" >
+                <ui-input class="fill" id="index1"></ui-input>
+                <ui-num-input class="fill" id="x1" type="number" value="0" placeholder="0"></ui-num-input>
+                <ui-num-input name="y" class="fill" id="y1" type="number" value="0" placeholder="0"></ui-num-input>
+            </ui-box-container>
+            <hr/>
 
-            <ui-prop-table class="debug" id="table">
+            <ui-prop name="offsetlan2" tooltip="child的名字，多个用“，”隔开；第二个是x坐标偏移量；第三个是y坐标偏移量；"></ui-prop>
+            <ui-box-container class="layout horizontal" >
+                <ui-input class="fill" id="index2"></ui-input>
+                <ui-num-input class="fill" id="x2" type="number" value="0" placeholder="0"></ui-num-input>
+                <ui-num-input name="y" class="fill" id="y2" type="number" value="0" placeholder="0"></ui-num-input>
+            </ui-box-container>
+            <hr/>
+
+
+            <!-- <ui-prop-table class="debug" id="table">
                 <template>
-                  <!-- ui-row 包裹多个组件时为多栏效果 -->
                     <ui-row id="row1" name="offsetlan1" tooltip="child的名字，多个用“，”隔开；第二个是x坐标偏移量；第三个是y坐标偏移量；">
                         <ui-input class="fill" id="index1"></ui-input>
                         <ui-num-input class="fill" id="x1" type="number" value="0" placeholder="0"></ui-num-input>
@@ -45,12 +62,8 @@
                         <ui-num-input class="fill" id="x2" type="number" value="0" placeholder="0"></ui-num-input>
                         <ui-num-input name="y" class="fill" id="y2" type="number" value="0" placeholder="0"></ui-num-input>
                     </ui-row>
-                    <!-- <ui-row name="Bar">
-                        <ui-input class="fill"></ui-input>
-                        <ui-checkbox></ui-checkbox>
-                    </ui-row> -->
                 </template>
-            </ui-prop-table>
+            </ui-prop-table> -->
 
             
             <ui-button class="button blue big" id="btn2" @click="onApplyBtnClick" v-disabled="isProcessing">输出偏移后的坐标值
